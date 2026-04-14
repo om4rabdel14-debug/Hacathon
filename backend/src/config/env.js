@@ -19,6 +19,7 @@ const config = Object.freeze({
   supabaseServiceKey: process.env.SUPABASE_SERVICE_KEY,
   supabaseAnonKey: process.env.SUPABASE_ANON_KEY || '',
   geminiApiKey: process.env.GEMINI_API_KEY,
+  googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY || '',
   frontendUrl: process.env.FRONTEND_URL || 'http://localhost:5173',
 });
 

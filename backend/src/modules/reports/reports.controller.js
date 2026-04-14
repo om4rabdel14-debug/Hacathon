@@ -21,4 +21,33 @@ async function getReportTimeline(req, res) {
   res.json(success(timeline));
 }
 
-module.exports = { submitReport, getReport, trackReport, getReportTimeline };
+async function getDuplicateReports(req, res) {
+  const duplicates = await reportsService.getDuplicateReports(req.params.id);
+  res.json(success(duplicates));
+}
+
+async function submitFeedback(req, res) {
+  const feedback = await reportsService.submitFeedback(req.params.id, req.body);
+  res.status(201).json(success(feedback, 'Citizen feedback submitted successfully'));
+}
+
+async function getFeedbackSummary(req, res) {
+  const summary = await reportsService.getFeedbackSummary(req.params.id);
+  res.json(success(summary));
+}
+
+async function getEscalation(req, res) {
+  const escalation = await reportsService.getEscalation(req.params.id);
+  res.json(success(escalation));
+}
+
+module.exports = {
+  submitReport,
+  getReport,
+  trackReport,
+  getReportTimeline,
+  getDuplicateReports,
+  submitFeedback,
+  getFeedbackSummary,
+  getEscalation,
+};

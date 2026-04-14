@@ -5,6 +5,7 @@ const reportsRoutes = require('../modules/reports/reports.routes');
 const dashboardRoutes = require('../modules/dashboard/dashboard.routes');
 const authRoutes = require('../modules/auth/auth.routes');
 const resolutionRoutes = require('../modules/resolution/resolution.routes');
+const locationRoutes = require('../modules/location/location.routes');
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use('/reports', reportsRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/auth', authRoutes);
 router.use('/resolution', resolutionRoutes);
+router.use('/location', locationRoutes);
 
 module.exports = router;

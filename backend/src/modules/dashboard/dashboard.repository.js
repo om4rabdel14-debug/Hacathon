@@ -7,11 +7,12 @@ async function getStats() {
   // Total reports
   const { count: total } = await supabase
     .from('reports')
-    .select('*', { count: 'exact', head: true });
+    .select('*', { count: 'exact', head: true })
+    .neq('status', 'merged');
 
   // Count by status
   const statusCounts = {};
-  for (const status of ['submitted', 'analyzing', 'assigned', 'in_progress', 'resolved', 'rejected']) {
+  for (const status of ['submitted', 'analyzing', 'assigned', 'in_progress', 'resolved', 'rejected', 'merged']) {
     const { count } = await supabase
       .from('reports')
       .select('*', { count: 'exact', head: true })
@@ -35,6 +36,7 @@ async function getStats() {
   const { count: todayCount } = await supabase
     .from('reports')
     .select('*', { count: 'exact', head: true })
+    .neq('status', 'merged')
     .gte('created_at', today.toISOString());
 
   return {
@@ -46,6 +48,7 @@ async function getStats() {
     active: statusCounts.in_progress || 0,
     resolved: statusCounts.resolved || 0,
     urgent: priorityCounts.urgent || 0,
+    merged: statusCounts.merged || 0,
   };
 }
 
@@ -70,6 +73,7 @@ async function getReports(filters = {}) {
 
   // Apply filters
   if (status) query = query.eq('status', status);
+  if (!status) query = query.neq('status', 'merged');
   if (severity) query = query.eq('severity', severity);
   if (department) query = query.eq('assigned_department', department);
   if (priority_level) query = query.eq('priority_level', priority_level);

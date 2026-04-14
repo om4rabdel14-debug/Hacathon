@@ -2,7 +2,10 @@ const { Router } = require('express');
 const multer = require('multer');
 const reportsController = require('./reports.controller');
 const validate = require('../../app/middlewares/validate.middleware');
-const { createReportSchema } = require('../../core/validators/report.validator');
+const {
+  createReportSchema,
+  createFeedbackSchema,
+} = require('../../core/validators/report.validator');
 
 const router = Router();
 
@@ -28,6 +31,21 @@ router.post('/',
 
 // GET /api/reports/track/:id - Citizen tracking (report + timeline + resolution images)
 router.get('/track/:id', reportsController.trackReport);
+
+// GET /api/reports/:id/duplicates - Get merged duplicate submissions
+router.get('/:id/duplicates', reportsController.getDuplicateReports);
+
+// POST /api/reports/:id/feedback - Citizen confirms whether the fix worked
+router.post('/:id/feedback',
+  validate(createFeedbackSchema),
+  reportsController.submitFeedback
+);
+
+// GET /api/reports/:id/feedback-summary - Get aggregate citizen feedback
+router.get('/:id/feedback-summary', reportsController.getFeedbackSummary);
+
+// GET /api/reports/:id/escalation - Get current escalation state and history
+router.get('/:id/escalation', reportsController.getEscalation);
 
 // GET /api/reports/:id - Get report by ID
 router.get('/:id', reportsController.getReport);

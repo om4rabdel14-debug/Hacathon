@@ -11,8 +11,11 @@ const logger = require('../../config/logger');
  */
 async function updateStatus(reportId, newStatus, note, changedBy) {
   // Get current report
-  const report = await reportsRepository.findById(reportId);
+  const report = await reportsRepository.findByIdOptional(reportId);
   if (!report) throw new NotFoundError('Report not found');
+  if (report.duplicate_of_report_id) {
+    throw new BadRequestError('Merged duplicate submissions cannot be updated directly. Update the primary report instead.');
+  }
 
   // Validate status transition
   if (!isValidTransition(report.status, newStatus)) {
@@ -24,6 +27,13 @@ async function updateStatus(reportId, newStatus, note, changedBy) {
   // Update report status
   const updated = await resolutionRepository.updateReportStatus(reportId, {
     status: newStatus,
+    resolved_at: newStatus === 'resolved' ? new Date().toISOString() : report.resolved_at,
+    next_escalation_at: ['resolved', 'rejected'].includes(newStatus) ? null : report.next_escalation_at,
+    escalation_stage: newStatus === 'resolved'
+      ? 'closed_resolved'
+      : newStatus === 'rejected'
+        ? 'rejected'
+        : report.escalation_stage,
   });
 
   // Insert timeline entry
@@ -43,8 +53,11 @@ async function updateStatus(reportId, newStatus, note, changedBy) {
  * Add a note to the report timeline without changing status.
  */
 async function addNote(reportId, note, changedBy) {
-  const report = await reportsRepository.findById(reportId);
+  const report = await reportsRepository.findByIdOptional(reportId);
   if (!report) throw new NotFoundError('Report not found');
+  if (report.duplicate_of_report_id) {
+    throw new BadRequestError('Add notes to the primary report, not the merged duplicate submission.');
+  }
 
   const entry = await resolutionRepository.insertTimelineEntry({
     report_id: reportId,
@@ -62,8 +75,11 @@ async function addNote(reportId, note, changedBy) {
  * Upload a resolution (proof of fix) image.
  */
 async function uploadResolutionPhoto(reportId, file, caption) {
-  const report = await reportsRepository.findById(reportId);
+  const report = await reportsRepository.findByIdOptional(reportId);
   if (!report) throw new NotFoundError('Report not found');
+  if (report.duplicate_of_report_id) {
+    throw new BadRequestError('Upload resolution images to the primary report, not the merged duplicate submission.');
+  }
 
   if (!file) throw new BadRequestError('Image file is required');
 

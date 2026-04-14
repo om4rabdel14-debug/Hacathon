@@ -35,4 +35,22 @@ const addNoteSchema = z.object({
     .max(1000, 'Note must be at most 1000 characters'),
 });
 
-module.exports = { createReportSchema, updateStatusSchema, addNoteSchema };
+const createFeedbackSchema = z.object({
+  citizen_name: z.string().min(2).max(100).optional(),
+  citizen_email: z.string().email('Invalid email address').optional().or(z.literal('')),
+  rating: z.preprocess((v) => Number(v), z.number().int().min(1).max(5)),
+  resolved_confirmed: z.preprocess((v) => {
+    if (typeof v === 'boolean') return v;
+    if (v === 'true') return true;
+    if (v === 'false') return false;
+    return v;
+  }, z.boolean()),
+  comment: z.string().max(1000).optional(),
+});
+
+module.exports = {
+  createReportSchema,
+  updateStatusSchema,
+  addNoteSchema,
+  createFeedbackSchema,
+};

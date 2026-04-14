@@ -12,6 +12,7 @@
  * @property {number} active
  * @property {number} resolved
  * @property {number} urgent
+ * @property {number} merged
  */
 
 /**

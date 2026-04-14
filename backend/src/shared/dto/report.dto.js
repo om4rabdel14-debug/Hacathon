@@ -22,6 +22,11 @@
  * @property {string} priority_level
  * @property {string} status
  * @property {string} assigned_department
+ * @property {string} duplicate_of_report_id
+ * @property {number} submission_count
+ * @property {string} sla_due_at
+ * @property {number} escalation_level
+ * @property {string} escalation_stage
  * @property {string} created_at
  * @property {string} updated_at
  */
@@ -31,6 +36,9 @@
  * @property {ReportDTO} report
  * @property {Array<TimelineEntryDTO>} timeline
  * @property {Array<ResolutionImageDTO>} resolution_images
+ * @property {Array<ReportDTO>} merged_reports
+ * @property {FeedbackSummaryDTO} feedback_summary
+ * @property {EscalationDTO} escalation
  */
 
 /**
@@ -51,6 +59,28 @@
  * @property {string} image_url
  * @property {string} caption
  * @property {string} uploaded_at
+ */
+
+/**
+ * @typedef {Object} FeedbackSummaryDTO
+ * @property {number} total_reviews
+ * @property {number|null} average_rating
+ * @property {number} resolved_confirmed_count
+ * @property {number} unresolved_count
+ * @property {number|null} satisfaction_rate
+ * @property {string|null} latest_review_at
+ */
+
+/**
+ * @typedef {Object} EscalationDTO
+ * @property {number} level
+ * @property {string} stage
+ * @property {string} label
+ * @property {number} overdue_days
+ * @property {string|null} due_at
+ * @property {string|null} next_escalation_at
+ * @property {boolean} is_overdue
+ * @property {boolean} is_closed
  */
 
 module.exports = {};

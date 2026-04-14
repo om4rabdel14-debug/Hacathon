@@ -5,6 +5,7 @@ const REPORT_STATUSES = Object.freeze({
   IN_PROGRESS: 'in_progress',
   RESOLVED: 'resolved',
   REJECTED: 'rejected',
+  MERGED: 'merged',
 });
 
 const STATUS_LIST = Object.values(REPORT_STATUSES);
@@ -17,10 +18,25 @@ const STATUS_TRANSITIONS = Object.freeze({
   [REPORT_STATUSES.IN_PROGRESS]: [REPORT_STATUSES.RESOLVED, REPORT_STATUSES.ASSIGNED],
   [REPORT_STATUSES.RESOLVED]: [],
   [REPORT_STATUSES.REJECTED]: [],
+  [REPORT_STATUSES.MERGED]: [],
 });
 
 function isValidTransition(from, to) {
   return STATUS_TRANSITIONS[from]?.includes(to) ?? false;
 }
 
-module.exports = { REPORT_STATUSES, STATUS_LIST, STATUS_TRANSITIONS, isValidTransition };
+function isClosedStatus(status) {
+  return [
+    REPORT_STATUSES.RESOLVED,
+    REPORT_STATUSES.REJECTED,
+    REPORT_STATUSES.MERGED,
+  ].includes(status);
+}
+
+module.exports = {
+  REPORT_STATUSES,
+  STATUS_LIST,
+  STATUS_TRANSITIONS,
+  isValidTransition,
+  isClosedStatus,
+};
