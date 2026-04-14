@@ -12,7 +12,8 @@
       "Bash(curl -s -X POST https://zbpatzmnulvjdjyuohfj.supabase.co/rest/v1/rpc/exec_sql -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicGF0em1udWx2amRqeXVvaGZqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjE1NDg5NiwiZXhwIjoyMDkxNzMwODk2fQ.y1z1dPaW_8kacTxFfViXH9s659g2VqfALEaMGH5iEeY' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicGF0em1udWx2amRqeXVvaGZqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjE1NDg5NiwiZXhwIjoyMDkxNzMwODk2fQ.y1z1dPaW_8kacTxFfViXH9s659g2VqfALEaMGH5iEeY')",
       "Bash(curl -s -o /tmp/waste_real.jpg \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Overflowing_bin.jpg/640px-Overflowing_bin.jpg\")",
       "Read(//tmp/**)",
-      "Bash(curl -s -X POST http://localhost:3000/api/reports -F image=@/tmp/waste_real.jpg -F 'description=Overflowing garbage bin on the street near a school' -F lat=31.5326 -F lng=35.0998 -F 'address=Main Street, near school' -F 'citizen_name=Test User')"
+      "Bash(curl -s -X POST http://localhost:3000/api/reports -F image=@/tmp/waste_real.jpg -F 'description=Overflowing garbage bin on the street near a school' -F lat=31.5326 -F lng=35.0998 -F 'address=Main Street, near school' -F 'citizen_name=Test User')",
+      "Bash(wc -l src/**/*.js src/**/**/*.js src/**/**/**/*.js src/**/**/**/**/*.js)"
     ]
   }
 }
