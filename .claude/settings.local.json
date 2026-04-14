@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(node -e ':*)",
+      "Bash(curl -s -X POST http://localhost:3000/api/auth/login -H 'Content-Type: application/json' -d '{\"email\":\"barahawamdeh2003@gmail.com\",\"password\":\"Bhw2003@@1\"}')",
+      "Bash(curl -s http://localhost:3000/api/dashboard/stats -H 'Authorization: Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6ImMxNjQ0MzFhLTM3MTctNDM4OS05OGIxLWY1MDNmMzVhN2MyZCIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3picGF0em1udWx2amRqeXVvaGZqLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiIyYmNjMzRlNC1lNTM4LTQzMzMtODY3NS0xMjgwM2RkYmYyMzgiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzc2MTY0NTY3LCJpYXQiOjE3NzYxNjA5NjcsImVtYWlsIjoiYmFyYWhhd2FtZGVoMjAwM0BnbWFpbC5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImVtYWlsX3ZlcmlmaWVkIjp0cnVlfSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTc3NjE2MDk2N31dLCJzZXNzaW9uX2lkIjoiMzgzMmQ5NTYtMmEyMi00YmMyLTgyMmMtMTM2YjljYTdjNTNkIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.LSzOyydpp9YirsacAwtiPvBzbkj9ASUhWGXYla0iEMfdicVFrg0s_dFnESU_0uqmMNX_1YYVRNCPkwdz13mkHA')",
+      "Bash(node src/scripts/seed.js)",
+      "Bash(curl -s -o /tmp/test_waste.jpg \"https://placehold.co/600x400/e2e8f0/475569?text=Overflowing+Bin\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/reports -F image=@/tmp/test_waste.jpg -F 'description=في حاوية ممتلئة والزبالة طالعة منها جنب مدرسة' -F lat=31.5326 -F lng=35.0998 -F 'address=Main Street, near school' -F 'citizen_name=Test User')",
+      "Bash(node -e \"process.stdin.on\\('data',d=>console.log\\(JSON.stringify\\(JSON.parse\\(d\\),null,2\\)\\)\\)\")",
+      "Bash(curl -s -X POST https://zbpatzmnulvjdjyuohfj.supabase.co/rest/v1/rpc/exec_sql -H 'apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicGF0em1udWx2amRqeXVvaGZqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjE1NDg5NiwiZXhwIjoyMDkxNzMwODk2fQ.y1z1dPaW_8kacTxFfViXH9s659g2VqfALEaMGH5iEeY' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpicGF0em1udWx2amRqeXVvaGZqIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NjE1NDg5NiwiZXhwIjoyMDkxNzMwODk2fQ.y1z1dPaW_8kacTxFfViXH9s659g2VqfALEaMGH5iEeY')",
+      "Bash(curl -s -o /tmp/waste_real.jpg \"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Overflowing_bin.jpg/640px-Overflowing_bin.jpg\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s -X POST http://localhost:3000/api/reports -F image=@/tmp/waste_real.jpg -F 'description=Overflowing garbage bin on the street near a school' -F lat=31.5326 -F lng=35.0998 -F 'address=Main Street, near school' -F 'citizen_name=Test User')"
+    ]
+  }
+}
